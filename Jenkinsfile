@@ -43,7 +43,18 @@ pipeline {
         sh 'cat /root/.jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml' */
       }
     }
-      
+    
+    stage ('SAST') {
+      steps {
+        sh 'echo "SAST"'
+        /*
+        withSonarQubeEnv('SonarQube') {
+          sh 'mvn sonar:sonar'
+          sh 'cat target/sonar/report-task.txt'
+        } */
+      }
+    }
+    
     stage('Build') {
       steps {
         sh 'mvn clean package'
